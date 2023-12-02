@@ -1,3 +1,4 @@
+# NOT COMPLETE
 numberStrings = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
 def printNumbersInLine():
