@@ -90,7 +90,6 @@ type Coordinates struct {
 
 // NOTE: not able to solve
 func Solve06v2() {
-	// var wg sync.WaitGroup
 	directions := []Coordinates{
 		{-1, 0},
 		{0, 1},
@@ -111,13 +110,11 @@ func Solve06v2() {
 			next = curr
 			if walkedGrid[curr.x][curr.y]&walkDirection[gd] == 1 {
 				result[extraObstacle.x][extraObstacle.y] = true
-				// wg.Done()
 				return true
 			}
 			walkedGrid[curr.x][curr.y] |= walkDirection[gd]
 			next.x += directions[gd].x
 			next.y += directions[gd].y
-			// fmt.Println("next:", next)
 			if !isUnderLimit(next.x, next.y, maxX, maxY) {
 				break
 			}
@@ -129,7 +126,6 @@ func Solve06v2() {
 				curr.y = next.y
 			}
 		}
-		// wg.Done()
 		return false
 	}
 
@@ -147,9 +143,8 @@ func Solve06v2() {
 			gd++
 			gd %= 4
 		} else {
-			if !(next.x == x && next.y == y) {
+			if !(next.x == x && next.y == y) && walkedGrid[next.x][next.y] == 0 {
 				cloneWGrid := DeepClone2DSlice(walkedGrid)
-				// wg.Add(1)
 				isLooping(cloneWGrid, curr, next, gd)
 			}
 			walkedGrid[curr.x][curr.y] |= walkDirection[gd]
@@ -167,8 +162,6 @@ func Solve06v2() {
 	}
 
 	fmt.Println("Result:", resCount)
-
-	// wg.Wait()
 }
 
 /*
