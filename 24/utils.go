@@ -34,3 +34,35 @@ func DeepClone2DSlice[T any](original [][]T) [][]T {
 	}
 	return clone
 }
+
+// AI generated
+func CountOccurrences[T comparable](grid [][]T, value T) int {
+	count := 0
+	for _, row := range grid {
+		for _, cell := range row {
+			if cell == value {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func gcd(a, b int) int {
+	if b < a {
+		a, b = b, a
+	}
+	rem := b % a
+	switch rem {
+	case 0:
+		return a
+	case 1:
+		return 1
+	default:
+		return gcd(rem, a)
+	}
+}
+
+func abs(a int) int {
+	return max(a, -a)
+}
