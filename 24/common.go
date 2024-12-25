@@ -100,3 +100,22 @@ func splitStringToIntDelimiter(in string, delim string) []int {
 	}
 	return result
 }
+
+func gcd(a, b int) int {
+	if b < a {
+		a, b = b, a
+	}
+	rem := b % a
+	switch rem {
+	case 0:
+		return a
+	case 1:
+		return 1
+	default:
+		return gcd(rem, a)
+	}
+}
+
+func abs(a int) int {
+	return max(a, -a)
+}

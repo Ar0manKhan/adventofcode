@@ -48,21 +48,28 @@ func CountOccurrences[T comparable](grid [][]T, value T) int {
 	return count
 }
 
-func gcd(a, b int) int {
-	if b < a {
-		a, b = b, a
+// Convert2DSlice converts a 2D slice of type T to a 2D slice of type U.
+// AI generated
+func Convert2DSlice[T, U any](input [][]T, convert func(T) U) [][]U {
+	output := make([][]U, len(input))
+	for i, row := range input {
+		output[i] = make([]U, len(row))
+		for j, val := range row {
+			output[i][j] = convert(val)
+		}
 	}
-	rem := b % a
-	switch rem {
-	case 0:
-		return a
-	case 1:
-		return 1
-	default:
-		return gcd(rem, a)
-	}
+	return output
 }
 
-func abs(a int) int {
-	return max(a, -a)
+// DisplayGrid displays a 2D grid with custom cell and row processing.
+// `grid` is the 2D slice to display.
+// `displayCell` is a function called for each cell.
+// `endRow` is a function called at the end of each row.
+func Display2DSlice[T any](grid [][]T, displayCell func(cell T), endRow func()) {
+	for _, row := range grid {
+		for _, cell := range row {
+			displayCell(cell)
+		}
+		endRow()
+	}
 }
